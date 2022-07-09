@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "c1efa29e-8fcd-48c3-89f3-d10a6d2addb5",
+		"name": "cats",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21708953"
+	},
+	"item": [
+		{
+			"name": "/api/v1/tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/cats/filter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/cats/filter?tag=cute&omit=0&total=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"cats",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "tag",
+							"value": "cute"
+						},
+						{
+							"key": "omit",
+							"value": "0"
+						},
+						{
+							"key": "total",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/cats/match",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/cats/match?string=sca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"cats",
+						"match"
+					],
+					"query": [
+						{
+							"key": "string",
+							"value": "sca"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

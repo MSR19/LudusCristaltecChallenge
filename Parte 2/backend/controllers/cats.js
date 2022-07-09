@@ -39,7 +39,6 @@ const getCatAux  = (tag, omit, total) => {
         }));
 }
 
-
 const matchCatAux = (tag) => {
     return new Promise ( (resolve) => 
     https.get('https://cataas.com/api/cats?tags=' + tag, (resp) => {
