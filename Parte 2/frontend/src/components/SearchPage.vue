@@ -69,6 +69,8 @@ export default {
 
             this.page = 1
 
+            this.getTags()
+
             this.post(string, this.processData())
         },
         getTags() {
