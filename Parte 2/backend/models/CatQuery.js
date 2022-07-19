@@ -1,12 +1,14 @@
 import { Sequelize, DataTypes } from  'sequelize';
+import dotenv from 'dotenv'
+dotenv.config();    
 
-const sequelize = new Sequelize('catdb', 'root', '1234', {
-    host: 'localhost',
-    port: "3312",
+const sequelize = new Sequelize(process.env.REACT_APP_DATABASE_NAME, process.env.REACT_APP_DATABASE_USER,process.env.REACT_APP_DATABASE_PASSWORD, {
+    host: process.env.REACT_APP_DATABASE_HOST,
+    port: process.env.REACT_APP_DATABASE_PORT,
     dialect: 'mariadb' 
 });
 
-export const catsQuery = sequelize.define('catsQuery', {
+export default sequelize.define('catsQuery', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -22,3 +24,9 @@ export const catsQuery = sequelize.define('catsQuery', {
     }
 });
 
+
+
+(async () => {
+  await sequelize.sync({ force: true });
+  // Code here
+})();

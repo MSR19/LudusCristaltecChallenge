@@ -1,51 +1,4 @@
-import { Sequelize, DataTypes} from 'sequelize';
-import dotenv from 'dotenv'
-
-dotenv.config();    
-
-const sequelize = new Sequelize(process.env.REACT_APP_DATABASE_NAME, process.env.REACT_APP_DATABASE_USER,process.env.REACT_APP_DATABASE_PASSWORD, {
-    host: process.env.REACT_APP_DATABASE_HOST,
-    port: process.env.REACT_APP_DATABASE_PORT,
-    dialect: 'mariadb' 
-});
-
-const initTable = async () => {
-
-    console.log("ENTROU initTable")
-
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-
-    console.log("ENTROU initTable2")
-
-const catsQuery = sequelize.define("catsQuery", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    query: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    }
-}, {
-    charset: 'utf8mb4',
-    collate: 'utf8mb4_unicode_ci'
-  });
-
-await catsQuery.sync();
-
-console.log("Sequelized synced")
-
-}
+import catsQuery from '../models/CatQuery.js'
 
 //addSearchResult
 export const addCat = async (req, res) => {
@@ -79,29 +32,6 @@ export const addCat = async (req, res) => {
     }
 
 
-    await initTable();
-
-    
-    const catsQuery = sequelize.define('catsQuery', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        query: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        content: {
-          type: DataTypes.TEXT,
-          allowNull: false
-        }
-    }, {
-        charset: 'utf8mb4',
-        collate: 'utf8mb4_unicode_ci'
-      });
-
-
     const queries = await catsQuery.create({ query, content})
    
     
@@ -129,23 +59,6 @@ export const matchID = async (req, res) => {
         console.error('Unable to connect to the database:', error);
     }
     
-    await initTable();
-
-    const catsQuery = sequelize.define('catsQuery', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        query: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        content: {
-          type: DataTypes.TEXT,
-          allowNull: false
-        }
-    });
 
     const queries = await catsQuery.findOne({id});
 
@@ -164,24 +77,6 @@ export const getAll = async (req, res) => {
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
-
-    await initTable();
-
-    const catsQuery = sequelize.define('catsQuery', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        query: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        content: {
-          type: DataTypes.TEXT,
-          allowNull: false
-        }
-    });
 
     const queries = await catsQuery.findAll();
 
