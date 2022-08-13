@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: api
+    restart: on-failure
+    image: backend-api
+    build: 
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    network_mode: host
+
+  frontend:
+    container_name: client
+    restart: on-failure
+    image: frontend
+    build: 
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+    network_mode: host
+
