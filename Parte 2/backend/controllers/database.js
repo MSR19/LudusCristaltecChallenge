@@ -27,19 +27,21 @@ export const addCat = async (req, res) => {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-
-
-    const queries = await catsQuery.create({ query, content})
+        
+        const queries = await catsQuery.create({ query, content})
    
     
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    res.setHeader("Access-Control-Allow-Methods", "OPTIONS, POST, GET")
-    res.setHeader("Access-Control-Allow-Origin",  "*")
-    res.status(200);
-    res.send(queries);
+        res.setHeader('Access-Control-Allow-Headers', '*');
+        res.setHeader("Access-Control-Allow-Methods", "OPTIONS, POST, GET")
+        res.setHeader("Access-Control-Allow-Origin",  "*")
+        res.status(200);
+        res.send(queries);
+
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+        res.status(408);
+        res.send();
+    }
 }
 //findSearchResult
 export const matchID = async (req, res) => {
@@ -55,17 +57,17 @@ export const matchID = async (req, res) => {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
+        
+        const queries = await catsQuery.findOne({id});
+
+        res.setHeader("Access-Control-Allow-Origin",  "*")
+        res.status(200);
+        res.send(queries);
     } catch (error) {
         console.error('Unable to connect to the database:', error);
+        res.status(408);
+        res.send();
     }
-    
-
-    const queries = await catsQuery.findOne({id});
-
-    res.setHeader("Access-Control-Allow-Origin",  "*")
-    res.status(200);
-    res.send(queries);
-
 }
 
 
@@ -74,13 +76,17 @@ export const getAll = async (req, res) => {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
+        
+        const queries = await catsQuery.findAll();
+    
+        res.setHeader("Access-Control-Allow-Origin",  "*")
+        res.status(200);
+        res.send(queries);
+
     } catch (error) {
         console.error('Unable to connect to the database:', error);
+        res.status(408);
+        res.send();
     }
 
-    const queries = await catsQuery.findAll();
-
-    res.setHeader("Access-Control-Allow-Origin",  "*")
-    res.status(200);
-    res.send(queries);
 }
