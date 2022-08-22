@@ -1,10 +1,7 @@
-import catsQuery from '../models/CatQuery.js'
+import {catsQuery, sequelize} from '../models/CatQuery.js'
 
 //addSearchResult
 export const addCat = async (req, res) => {
-    
-    
-    console.log("ENTROU addCAT")
 
     let query = req.body.query;
 

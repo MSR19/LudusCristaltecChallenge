@@ -60,8 +60,6 @@ const matchCatAux = (tag) => {
 export const getTags = async (req, res) => {
 
     let tags = await getTagsAux();
-
-    console.log(tags);
     
     res.setHeader("Access-Control-Allow-Origin",  "*")
     res.status(200);
@@ -69,8 +67,6 @@ export const getTags = async (req, res) => {
 }
 
 export const getCat = async (req, res) => {
-
-    console.log(req.query);
 
     let tag = req.query.tag
     let omit = req.query.omit
@@ -97,9 +93,6 @@ export const getCat = async (req, res) => {
     let tags = await getTagsAux();
 
     let valid = tags.find(item => item == tag);
-
-    console.log(tag);
-    console.log(valid);
 
     if (valid == undefined || !valid) {
         res.status(400);
